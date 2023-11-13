@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'httparty'
 require 'pry'
-class SummonerApi
+class SummonerApiAdapter
 
   def initialize(summoner_name)
     @summoner_name = summoner_name
