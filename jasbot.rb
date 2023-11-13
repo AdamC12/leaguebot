@@ -2,7 +2,7 @@
 
 require 'dotenv/load'
 require 'discordrb'
-require_relative 'class/summoner_api_adatper'
+require_relative 'class/summoner_api_adapter'
 
 
 bot = Discordrb::Bot.new token: ENV['DISCORDTOKEN'], client_id: 1172880556917276752
