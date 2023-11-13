@@ -6,6 +6,21 @@ class SummonerApiAdapter
   def initialize(summoner_name)
     @summoner_name = summoner_name
   end
+
+  def get_unique_champion_list
+    get_summoner_puuid
+    get_soloq_matches_for_puuid
+    unique_champions = get_unique_champions
+    if unique_champions < 6
+      message = "#{@summoner_name}, you've only played #{unique_champions} champs in your last 20 soloq games! good for you!"
+    else
+      message = "#{@summoner_name}, stop playing so many champions! you've played #{unique_champions} in 20 games you degenerate"
+    end
+    message
+  end
+
+  private
+
   def get_summoner_puuid
     request = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/#{@summoner_name}?api_key=#{ENV['APIKEY']}"
     response = HTTParty.get(request)
@@ -25,19 +40,6 @@ class SummonerApiAdapter
       response = HTTParty.get(request)
       champion_list << response['info']['participants'].detect{|h| h['summonerName'].downcase == @summoner_name.downcase}['championName']
     end
-
     champion_list.uniq.count
-  end
-
-  def get_unique_champion_list
-    get_summoner_puuid
-    get_soloq_matches_for_puuid
-    unique_champions = get_unique_champions
-    if unique_champions < 6
-      message = "#{@summoner_name}, you've only played #{unique_champions} champs in your last 20 soloq games! good for you!"
-    else
-      message = "#{@summoner_name}, stop playing so many champions! you've played #{unique_champions} in 20 games you degenerate"
-    end
-    message
   end
 end
