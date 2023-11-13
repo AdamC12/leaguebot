@@ -39,7 +39,7 @@ def get_unique_champion_list_for(summoner_name)
   end
 end
 
-bot = Discordrb::Bot.new token: 'MTE3Mjg4MDU1NjkxNzI3Njc1Mg.GU0LC7.bqUZlNapLPFyKgKfdYO-CgFl9tVQbPkfsFQTZM', client_id: 1172880556917276752
+bot = Discordrb::Bot.new token: ENV['DISCORDTOKEN'], client_id: 1172880556917276752
 
 bot.message(start_with: '!champions') do |event|
   summoner = event.message.content.split[1..-1].join(' ')
