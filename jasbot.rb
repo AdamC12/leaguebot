@@ -9,7 +9,7 @@ bot = Discordrb::Bot.new token: ENV['DISCORDTOKEN'], client_id: 1172880556917276
 
 bot.message(start_with: '!champions') do |event|
   summoner = event.message.content.split[1..-1].join(' ')
-  summoner = ApiCommands.new(summoner)
+  summoner = SummonerApi.new(summoner)
   message = summoner.get_unique_champion_list
   event.respond message
 end
